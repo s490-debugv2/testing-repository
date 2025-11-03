@@ -1,5 +1,5 @@
-warn = function(...)end
-print = warn
+local warn = function(...)end
+local print = warn
 
 if debugX then
 	warn('Initialising Rayfield')
@@ -3987,3 +3987,4 @@ task.delay(4, function()
 end)
 
 return RayfieldLibrary
+
