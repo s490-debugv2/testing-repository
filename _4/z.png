@@ -1,3 +1,5 @@
+-- Railfield (rayfield modded)
+
 local warn = function(...)end
 local print = warn
 
@@ -14,6 +16,8 @@ end
 -- Errors with the function are caught and logged to the output
 local function loadWithTimeout(url: string, timeout: number?): ...any
 	assert(type(url) == "string", "Expected string, got " .. type(url))
+	-- preventing spying 
+	if url == "https://analytics.sirius.menu/script" then return end
 	timeout = timeout or 5
 	local requestCompleted = false
 	local success, result = false, nil
@@ -1665,7 +1669,8 @@ function RayfieldLibrary:CreateWindow(Settings)
 	Elements.Visible = false
 	LoadingFrame.Visible = true
 
-	if not Settings.DisableRayfieldPrompts then
+	-- fuck these retards
+	--[[if not Settings.DisableRayfieldPrompts then
 		task.spawn(function()
 			while true do
 				task.wait(math.random(180, 600))
@@ -1677,7 +1682,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 				})
 			end
 		end)
-	end
+	end]]
 
 	pcall(function()
 		if not Settings.ConfigurationSaving.FileName then
@@ -1712,7 +1717,8 @@ function RayfieldLibrary:CreateWindow(Settings)
 		end
 	end
 
-	if Settings.Discord and Settings.Discord.Enabled and not useStudio then
+	-- no
+	--[[if Settings.Discord and Settings.Discord.Enabled and not useStudio then
 		if isfolder and not isfolder(RayfieldFolder.."/Discord Invites") then
 			makefolder(RayfieldFolder.."/Discord Invites")
 		end
@@ -1740,7 +1746,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 				writefile(RayfieldFolder.."/Discord Invites".."/"..Settings.Discord.Invite..ConfigurationExtension,"Rayfield RememberJoins is true for this invite, this invite will not ask you to join again")
 			end
 		end
-	end
+	end]]
 
 	if (Settings.KeySystem) then
 		if not Settings.KeySettings then
@@ -3987,4 +3993,3 @@ task.delay(4, function()
 end)
 
 return RayfieldLibrary
-
