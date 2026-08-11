@@ -19,12 +19,6 @@ try:
         print("Возможно, ваш IP заблокирован или требуется запустить VPN.")
         sys.exit()
 
-    # Проверяем, не подсунул ли сервер защиту от роботов (капчу)
-    if "cloudflare" in response.text.lower() or "captcha" in response.text.lower():
-        print("❌ Сайт включил защиту от автоматических скриптов (CAPTCHA/Cloudflare).")
-        print("Скрипт не сможет обойти это автоматически. Попробуйте сменить IP.")
-        sys.exit()
-
     # Запрашиваем email у пользователя
     email = input('Ваш Email: ').strip()
     if not email:
