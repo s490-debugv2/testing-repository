@@ -3,7 +3,7 @@ import sys
 
 # URL зеркала сервиса
 base_url = 'https://hide-my-name.me'
-success_url = 'https://hide-my-name.me/success/'
+success_url = 'https://hide-my-name.me/demo/success/'
 
 print("|| CRACKED BY LOVEDILKA ❤️‍🔥 ||\n")
 
