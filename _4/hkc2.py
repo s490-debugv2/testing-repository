@@ -1,47 +1,40 @@
 import requests
 import sys
 
-# URL зеркала сервиса
 base_url = 'https://hide-my-name.me'
 success_url = 'https://hide-my-name.me/demo/success/'
 
 print("|| CRACKED BY LOVEDILKA ❤️‍🔥 ||\n")
 
-# Используем сессию для автоматической поддержки cookies
 session = requests.Session()
 
 try:
-    # 1. Запрашиваем главную страницу демо-периода
     response = session.get(base_url, timeout=10)
 
     if response.status_code != 200:
-        print(f"⚠️ Ошибка доступа к сайту. Код ответа: {response.status_code}")
-        print("Возможно, ваш IP заблокирован или требуется запустить VPN.")
+        print(f"⚠️ Unable to connect to site. Error code: {response.status_code}")
         sys.exit()
 
-    # Запрашиваем email у пользователя
-    email = input('Ваш Email: ').strip()
+    email = input('Your Email: ').strip()
     if not email:
-        print("❌ Email не может быть пустым.")
+        print("❌ Email cant be blank")
         sys.exit()
 
-    # 2. Отправляем POST-запрос для получения кода
     payload = {"demo_mail": email}
     post_response = session.post(success_url, data=payload, timeout=10)
 
-    # Анализируем ответ сервера
     if post_response.status_code == 200:
         if 'Ваш код выслан' in post_response.text or 'код уже в пути' in post_response.text.lower():
-            print('\n✅ \033[1;32mВаш код уже в пути!\033[0m Проверьте свой почтовый ящик.')
+            print('\n✅ \033[1;32mYour code has been sent!\033[0m Check your mail box.')
         else:
-            print('\n❌ \033[1;31mУказанная почта не подходит, либо лимит тестовых периодов исчерпан.\033[0m')
-            # Выводим часть ответа сервера для диагностики, если что-то пошло не так
+            print('\n❌ \033[1;31mThe email cant be used to get code.\033[0m')
+            
             if "alert" in post_response.text:
-                print("Сообщение от сайта: Ошибка верификации формы.")
+                print("Message from site: Unable to verify")
     else:
-        print(f"\n⚠️ Сервер ответил ошибкой {post_response.status_code} при отправке формы.")
+        print(f"\n⚠️ Server returned {post_response.status_code}.")
 
 except requests.RequestException as e:
-    print(f"\033[1;31mОшибка сети или таймаута:\033[0m {e}")
+    print(f"\033[1;31mNetwork error:\033[0m {e}")
 
 sys.exit()
